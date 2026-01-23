@@ -1,0 +1,499 @@
+/* ==================== RESET & GENERAL ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Paleta de colores: NEGRO, BLANCO Y AMARILLO (Vibrante) */
+    --color-bg-dark: #0A0A0A; /* Negro profundo */
+    --color-text-light: #FFFFFF; /* Blanco */
+    --color-accent-yellow: #FFC300; /* AMARILLO VIBRANTE (Acento principal) */
+    --color-card-bg: #FFFFFF; /* Blanco para tarjetas */
+    --color-text-dark: #222; /* Texto oscuro en tarjetas */
+    --color-border-dark: #333;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark); 
+    line-height: 1.5;
+    text-transform: uppercase;
+    transition: filter 0.3s ease;
+}
+
+/* Efecto BLUR en el cuerpo cuando el modal está activo (solo al catálogo) */
+body.modal-abierto > :not(.modal-gallery) {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+}
+
+/* ==================== FONDO Y ANIMACIÓN (Movimiento y Brillo) ==================== */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-dark);
+    z-index: -4;
+}
+
+/* Partículas animadas grandes (Brillo Amarillo sobre negro) */
+.particles-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    /* Efecto gradiente de fondo en constante movimiento (solo Amarillo) */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 195, 0, 0.2) 0%, transparent 50%);
+    background-size: 200vmax 200vmax;
+    animation: backgroundPan 60s linear infinite;
+    opacity: 0.3;
+}
+@keyframes backgroundPan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* ==================== HEADER & NAVEGACIÓN DINÁMICA ==================== */
+header {
+    background: var(--color-bg-dark);
+    color: var(--color-text-light);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 195, 0, 0.4); /* Sombra de brillo Amarillo */
+    border-bottom: 3px solid var(--color-accent-yellow);
+}
+
+.logo-text {
+    font-family: 'Roboto Slab', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px var(--color-accent-yellow); /* Efecto Neón Amarillo */
+}
+
+.logo-text .highlight-neon {
+    color: var(--color-accent-yellow);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    list-style: none;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-weight: 400;
+    padding: 8px 15px;
+    transition: all .3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--color-accent-yellow); 
+    border-bottom: 2px solid var(--color-accent-yellow);
+    text-shadow: 0 0 5px var(--color-accent-yellow);
+}
+
+/* Botones de Contacto - Diseño Amarillo sobre Negro */
+.btn-contact {
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 4px; 
+    font-weight: 700;
+    transition: all .3s ease;
+}
+
+.btn-whatsapp {
+    background: var(--color-accent-yellow);
+    color: var(--color-bg-dark);
+    box-shadow: 0 0 10px rgba(255, 195, 0, 0.6);
+}
+
+.btn-whatsapp:hover {
+    background: #e6b200;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--color-accent-yellow);
+}
+
+.btn-call {
+    background: transparent;
+    color: var(--color-accent-yellow); 
+    border: 2px solid var(--color-accent-yellow);
+}
+
+.btn-call:hover {
+    background: var(--color-accent-yellow);
+    color: var(--color-bg-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--color-accent-yellow);
+}
+
+/* ==================== CATÁLOGO DE PRODUCTOS ==================== */
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    padding: 50px 30px;
+    gap: 35px;
+}
+
+.maquinaria {
+    background: var(--color-card-bg);
+    border-radius: 8px; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    padding: 25px;
+    text-align: center;
+    transition: all .4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+/* Brillo y elevación al pasar el ratón */
+.maquinaria:hover {
+    box-shadow: 0 10px 30px rgba(255, 195, 0, 0.6); /* Sombra de brillo Amarillo */
+    transform: translateY(-10px) scale(1.02);
+    border: 1px solid var(--color-accent-yellow);
+}
+
+/* Efecto SHINE avanzado (usando blanco brillante) */
+.maquinaria::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.0), rgba(255,255,255,0.3), rgba(255,255,255,0.0));
+    transform: skewX(-20deg);
+    animation: shine 6s infinite;
+    opacity: 0.5;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+
+.image-container {
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-border-dark);
+}
+
+.maquinaria img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.maquinaria:hover img {
+    transform: scale(1.08);
+}
+
+.maquinaria h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.4rem;
+    margin: 10px 0 5px;
+    color: var(--color-text-dark);
+    border-bottom: 2px solid var(--color-accent-yellow);
+    padding-bottom: 5px;
+}
+
+.summary {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.specs {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    text-align: left;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 0.9rem;
+}
+
+.specs li {
+    padding: 3px 0;
+    color: var(--color-text-dark);
+}
+
+.spec-label {
+    color: var(--color-accent-yellow); 
+    font-weight: 700;
+    display: inline-block;
+    min-width: 100px; 
+    margin-right: 5px;
+}
+
+/* ==================== BOTONES DE ACCIÓN ==================== */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Botones de alternar (Detalles/Galería) */
+.btn-toggle {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 2px solid var(--color-accent-yellow);
+    background: var(--color-bg-dark);
+    color: var(--color-accent-yellow);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .3s ease;
+    box-shadow: 0 0 5px rgba(255, 195, 0, 0.4);
+}
+
+.btn-toggle:hover {
+    background: var(--color-accent-yellow);
+    color: var(--color-bg-dark);
+    transform: scale(1.02);
+    box-shadow: 0 0 15px var(--color-accent-yellow);
+}
+
+/* Botón de Adquisición (WhatsApp) - El botón más importante (Amarillo) */
+.btn-adquirir-wa {
+    display: block;
+    width: 100%;
+    background: var(--color-accent-yellow);
+    color: var(--color-bg-dark);
+    padding: 16px 25px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: all .3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(255, 195, 0, 0.8);
+}
+
+.btn-adquirir-wa:hover {
+    background: #e6b200;
+    box-shadow: 0 8px 20px rgba(255, 195, 0, 1);
+    transform: scale(1.03);
+}
+
+/* ==================== PANELES DINÁMICOS (Detalles/Galería) ==================== */
+.panel {
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 15px;
+    overflow: hidden;
+    border-left: 5px solid var(--color-accent-yellow);
+    color: var(--color-text-dark);
+    font-size: 0.9rem;
+}
+
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+    padding: 5px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid var(--color-accent-yellow);
+    opacity: 0.9;
+    cursor: pointer; 
+    transition: border 0.2s;
+}
+
+.galeria img:hover {
+    border: 3px solid var(--color-accent-yellow);
+    opacity: 1;
+}
+
+/* Clase para ocultar (usada por JS) */
+.oculto {
+    display: none !important;
+}
+
+/* ==================== FOOTER ==================== */
+.footer-neon {
+    background: var(--color-bg-dark);
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 50px;
+    border-top: 5px solid var(--color-accent-yellow);
+    box-shadow: 0 0 20px rgba(255, 195, 0, 0.4); 
+}
+
+.footer-text {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* ==================== LIGHTBOX / MODAL GALLERY (Máximo Brillo) ==================== */
+
+.modal-gallery {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.oculto-modal {
+    display: none;
+}
+
+.contenido-modal {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    border: 5px solid var(--color-accent-yellow);
+    box-shadow: 0 0 40px var(--color-accent-yellow);
+    animation: zoomIn 0.3s;
+}
+
+/* Botón de Cierre (X) */
+.cerrar-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: var(--color-text-light);
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 5px 15px;
+    background: var(--color-bg-dark);
+    border-radius: 4px;
+    border: 2px solid var(--color-accent-yellow);
+    line-height: 1;
+    text-shadow: 0 0 10px var(--color-accent-yellow);
+}
+
+.cerrar-modal:hover,
+.cerrar-modal:focus {
+    color: var(--color-bg-dark);
+    background: var(--color-accent-yellow);
+    border-color: var(--color-accent-yellow);
+    text-decoration: none;
+    cursor: pointer;
+    text-shadow: none;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 850px) {
+    .catalogo {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+@media (max-width: 550px) {
+    .logo-text {
+        font-size: 1.4rem;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .btn-contact {
+        width: 100%;
+        text-align: center;
+    }
+    .specs li {
+        text-align: center;
+    }
+    .spec-label {
+        min-width: auto;
+        display: block;
+        margin-right: 0;
+    }
+}
+
+/* Cambio de colores de acento a Rojo y Dorado */
+header {
+    border-bottom: 5px solid #D42426 !important;
+    box-shadow: 0 0 20px rgba(212, 36, 38, 0.5) !important;
+}
+
+.logo-text {
+    text-shadow: 0 0 8px #D42426 !important;
+}
+
+.logo-text::before {
+    content: "🎅";
+    position: absolute;
+    top: -25px;
+    left: -15px;
+    font-size: 1.6rem;
+    transform: rotate(-15deg);
+}
+
+.logo-text .highlight-neon {
+    color: #FFD700 !important; /* Dorado */
+}
+/* ... (Todo tu CSS original se mantiene arriba) ... */
+
+/* ==================== AGREGADO PARA FLECHAS DEL MODAL ==================== */
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--color-accent-yellow);
+    border: 2px solid var(--color-accent-yellow);
+    font-size: 2.5rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    z-index: 1010;
+    user-select: none;
+}
+
+.modal-nav:hover {
+    background: var(--color-accent-yellow);
+    color: var(--color-bg-dark);
+    box-shadow: 0 0 15px var(--color-accent-yellow);
+}
+
+.prev-modal { left: 20px; }
+.next-modal { right: 20px; }
+
+@media (max-width: 600px) {
+    .modal-nav { font-size: 1.5rem; padding: 5px 10px; }
+    .prev-modal { left: 10px; }
+    .next-modal { right: 10px; }
+}
